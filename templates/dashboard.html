@@ -1,0 +1,112 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Mensagens</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Dashboard de Mensagens</h1>
+
+        <div class="dashboard-container">
+            <div class="chart-container">
+                <h2>Mensagens por Categoria</h2>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2>Mensagens por Período</h2>
+                <select v-model="selectedPeriod" @change="loadPeriodData">
+                    <option value="day">Diário</option>
+                    <option value="month">Mensal</option>
+                </select>
+                <canvas id="periodChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                categoryData: [],
+                periodData: [],
+                selectedPeriod: 'day',
+                categoryChart: null,
+                periodChart: null
+            },
+            mounted() {
+                this.loadCategoryData();
+                this.loadPeriodData();
+            },
+            methods: {
+                loadCategoryData() {
+                    axios.get('/api/messages/by-category/')
+                        .then(response => {
+                            this.categoryData = response.data;
+                            this.renderCategoryChart();
+                        });
+                },
+                loadPeriodData() {
+                    axios.get(`/api/messages/by-period/?period=${this.selectedPeriod}`)
+                        .then(response => {
+                            this.periodData = response.data;
+                            this.renderPeriodChart();
+                        });
+                },
+                renderCategoryChart() {
+                    const ctx = document.getElementById('categoryChart');
+
+                    if (this.categoryChart) {
+                        this.categoryChart.destroy();
+                    }
+
+                    this.categoryChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: this.categoryData.map(item => item.category),
+                            datasets: [{
+                                data: this.categoryData.map(item => item.count),
+                                backgroundColor: [
+                                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'
+                                ]
+                            }]
+                        }
+                    });
+                },
+                renderPeriodChart() {
+                    const ctx = document.getElementById('periodChart');
+
+                    if (this.periodChart) {
+                        this.periodChart.destroy();
+                    }
+
+                    this.periodChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: this.periodData.map(item => {
+                                const date = new Date(item.date);
+                                return this.selectedPeriod === 'day'
+                                    ? date.toLocaleDateString()
+                                    : `${date.getMonth()+1}/${date.getFullYear()}`;
+                            }),
+                            datasets: [{
+                                label: 'Mensagens',
+                                data: this.periodData.map(item => item.count),
+                                borderColor: '#36A2EB',
+                                fill: false
+                            }]
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

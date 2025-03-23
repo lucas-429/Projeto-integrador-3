@@ -1,0 +1,73 @@
+/* Estilos gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f5f2;
+    color: #333;
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Seções */
+section {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Portfólio - Galeria de imagens */
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gallery img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}

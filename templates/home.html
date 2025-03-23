@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Social Media</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre Mim</a></li>
+                <li><a href="#value">Meu Valor</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#vision">Visão</a></li>
+                <li><a href="#mission">Missão</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>PORTFOLIO</h1>
+            <p>Social Media Content Creator</p>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>Sobre Mim</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+    </section>
+
+    <section id="value">
+        <h2>Meu Valor</h2>
+        <p>Texto explicando seus diferenciais e experiência.</p>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfólio</h2>
+        <div class="gallery">
+            <img src="placeholder.jpg" alt="Imagem 1">
+            <img src="placeholder.jpg" alt="Imagem 2">
+            <img src="placeholder.jpg" alt="Imagem 3">
+        </div>
+    </section>
+
+    <section id="vision">
+        <h2>Visão</h2>
+        <p>O que você deseja alcançar com seu trabalho.</p>
+    </section>
+
+    <section id="mission">
+        <h2>Missão</h2>
+        <p>Qual é o propósito do seu trabalho?</p>
+    </section>
+
+    <footer id="contact">
+        <h2>Contato</h2>
+        <form action="{% url 'send_message' %}" method="post">
+    {% csrf_token %}
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="category">Categoria de Produto:</label>
+    <select id="category" name="category" required>
+        <option value="produto1">Produto 1</option>
+        <option value="produto2">Produto 2</option>
+        <option value="produto3">Produto 3</option>
+    </select>
+
+    <label for="message">Mensagem:</label>
+    <textarea id="message" name="content" rows="4" required></textarea>
+    <button type="submit">Send Message</button>
+</form>
+        <p>Email: contato@seudominio.com</p>
+        <p>Instagram: @seuperfil</p>
+    </footer>
+</body>
+</html>
