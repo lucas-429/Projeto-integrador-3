@@ -1,16 +1,11 @@
-<!-- templates/dashboard.html -->
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Mensagens</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="/static/dashboard.css">
-</head>
-<body>
+<!-- meu_app/templates/admin/index.html -->
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content %}
+    {{ block.super }}
+    <h2>Dashboard</h2>
+    <!-- Adicione aqui o conteúdo do seu dashboard -->
     <div id="app">
         <h1>Dashboard de Mensagens</h1>
 
@@ -31,6 +26,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         new Vue({
             el: '#app',
@@ -108,5 +106,4 @@
             }
         });
     </script>
-</body>
-</html>
+{% endblock %}lock %}

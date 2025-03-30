@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Message
 from .serializers import MessageSerializer
-
+from django.shortcuts import render
+from django.contrib.admin.views.decorators import staff_member_required
 def home(request):
     return render(request, 'home.html')
 
@@ -48,5 +49,6 @@ class MessagesByPeriod(APIView):
         return Response(counts)
 
 # meu_app/views.py
+@staff_member_required
 def dashboard(request):
     return render(request, 'dashboard.html')

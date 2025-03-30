@@ -17,12 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from meu_app import views, api_views
+from meu_app.admin import admin_site
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     path('', views.home, name='home'),
     path('send_message/', views.send_message, name='send_message'),
     path('api/messages/by-category/', api_views.MessagesByCategory.as_view(), name='messages_by_category'),
     path('api/messages/by-period/', api_views.MessagesByPeriod.as_view(), name='messages_by_period'),
-    path('dashboard/', views.dashboard, name='dashboard'),
 ]
